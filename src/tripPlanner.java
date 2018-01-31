@@ -1,9 +1,26 @@
 import java.util.Scanner;
 import java.lang.Math;
+import java.io.*;
+
 public class tripPlanner {
     static String start;
     static String dest;
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        geoplaces[] places= new geoplaces[4];
+        places[0].cityInfo("Delhi",28.7041,77.1025,5.3);
+        places[1].cityInfo("Mumbai",19.0760,19.0760,5.3);
+        places[2].cityInfo("Kolkata",22.5726,88.3639,5.3);
+        places[3].cityInfo("Chennai",13.0827,80.2707,5.3);
+
+        try {
+            ObjectOutputStream os= new ObjectOutputStream(new FileOutputStream("citydata.dat"));
+            for(int i=0;i<places.length;i++){
+                os.writeObject(places[i]);
+            }
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         intro();
         budget();
