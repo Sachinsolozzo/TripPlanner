@@ -1,26 +1,8 @@
 import java.util.Scanner;
 import java.lang.Math;
-import java.io.*;
 
 public class tripPlanner {
-    static String start;
-    static String dest;
     public static void main(String[] args)  {
-        geoplaces[] places= new geoplaces[4];
-        places[0].cityInfo("Delhi",28.7041,77.1025,5.3);
-        places[1].cityInfo("Mumbai",19.0760,19.0760,5.3);
-        places[2].cityInfo("Kolkata",22.5726,88.3639,5.3);
-        places[3].cityInfo("Chennai",13.0827,80.2707,5.3);
-
-        try {
-            ObjectOutputStream os= new ObjectOutputStream(new FileOutputStream("citydata.dat"));
-            for(int i=0;i<places.length;i++){
-                os.writeObject(places[i]);
-            }
-            os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         intro();
         budget();
@@ -33,9 +15,9 @@ public class tripPlanner {
         System.out.println("Hey there! What's your name?");
         String name= input.nextLine();
         System.out.println("Nice to meet you "+name+", where are you travelling to?");
-        dest= input.nextLine();
+        String dest= input.nextLine();
         System.out.println("Where from?");
-        start= input.nextLine();
+        String start= input.nextLine();
         System.out.println("Great! "+dest+" sounds like a great trip.\n**********");
     }
     public static void budget(){
@@ -64,6 +46,11 @@ public class tripPlanner {
         // The code written above is the Haversine expression to find the Great-Circle Distance between two points.
         System.out.println("Your destination is at a distance of "+dis+" kms.");
         System.out.println("Ideally it would be a "+(dis/900)+" hr long flight.");    //average flight speed= 900 kmph
+        System.out.println("Enter the time zone of"+start);
+        double startime= input.nextDouble();
+        System.out.println("Enter the time zone of "+dest);
+        double destime= input.nextDouble();
+        System.out.println("Your destination has a time difference of "+(destime-startime));
         System.out.println("Thank you for using this program. Have a safe journey.");
     }
 }
